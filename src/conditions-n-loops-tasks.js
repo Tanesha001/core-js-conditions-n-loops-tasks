@@ -119,8 +119,17 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const digits = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+  let res = '';
+  const dec = Math.floor(num / 10);
+  for (let i = 0; i < dec; i += 1) {
+    res += 'X';
+  }
+  if (num % 10 !== 0) {
+    res += digits[(num % 10) - 1];
+  }
+  return res;
 }
 
 /**
@@ -248,8 +257,14 @@ function getIndexOf(str, letter) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const strNum = `${num}`;
+  for (let i = 0; i < strNum.length; i += 1) {
+    if (strNum[i] === `${digit}`) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -309,8 +324,26 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const len = matrix.length;
+  const res = matrix;
+
+  for (let i = 0; i < len / 2; i += 1) {
+    for (let j = i; j < len - i - 1; j += 1) {
+      [
+        res[i][j],
+        res[j][len - 1 - i],
+        res[len - 1 - i][len - 1 - j],
+        res[len - 1 - j][i],
+      ] = [
+        res[len - 1 - j][i],
+        res[i][j],
+        res[j][len - 1 - i],
+        res[len - 1 - i][len - 1 - j],
+      ];
+    }
+  }
+  return res;
 }
 
 /**
